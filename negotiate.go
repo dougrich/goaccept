@@ -21,17 +21,20 @@ func Negotiate(header string, acceptable ...string) (string, error) {
 
 		quality := 1.0
 
-		subp := strings.SplitN(p, ";", 2)
-		if len(subp) == 2 {
+		subp := strings.Split(p, ";")
+		if len(subp) > 1 {
 			p = subp[0]
-			if subp[1][:2] != "q=" {
-				return "", ErrorBadAccept{header}
+			for _, p2 := range subp[1:] {
+				if p2[:2] != "q=" {
+					continue
+				}
+				q, err := strconv.ParseFloat(p2[2:], 64)
+				if err != nil {
+					return "", ErrorBadAccept{header}
+				}
+				quality = q
+				break
 			}
-			q, err := strconv.ParseFloat(subp[1][2:], 64)
-			if err != nil {
-				return "", ErrorBadAccept{header}
-			}
-			quality = q
 		}
 
 		requested = append(requested, RequestedType{quality, p})

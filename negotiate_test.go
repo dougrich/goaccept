@@ -45,4 +45,5 @@ func TestAccept(t *testing.T) {
 	p("NotAcceptable", "", accept.ErrorNotAcceptable{[]accept.RequestedType{{1.0, "text/plain"}}, []string{"text/html"}}, "text/plain", "text/html")
 	p("BadFormat", "", accept.ErrorBadAccept{"testgarbage,,,"}, "testgarbage,,,", "text/html")
 	p("Quality", "text/plain", nil, "text/html;q=0.2, text/plain;q=0.8", "text/html", "text/plain")
+	p("Multipart", "text/plain", nil, "text/html;level=1;q=0.2, text/plain;level=2;q=0.8", "text/html", "text/plain")
 }
