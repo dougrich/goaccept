@@ -6,8 +6,6 @@ import (
 	"strings"
 )
 
-
-
 // Negotiate breaks up a header, sorts it by quality, and comapres it with acceptable to determine the most suitable content type
 func Negotiate(header string, acceptable ...string) (string, error) {
 	if header == "" {
@@ -52,7 +50,7 @@ func Negotiate(header string, acceptable ...string) (string, error) {
 // This is a requested type after it has been parsed
 type RequestedType struct {
 	// The quality of this type. The higher, the more preferred this type is.
-	Quality  float64
+	Quality float64
 	// The mime type; note that this might be a pattern like */*
 	MimeType string
 }
