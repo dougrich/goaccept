@@ -46,4 +46,5 @@ func TestAccept(t *testing.T) {
 	p("BadFormat", "", accept.ErrorBadAccept{"testgarbage,,,"}, "testgarbage,,,", "text/html")
 	p("Quality", "text/plain", nil, "text/html;q=0.2, text/plain;q=0.8", "text/html", "text/plain")
 	p("Multipart", "text/plain", nil, "text/html;level=1;q=0.2, text/plain;level=2;q=0.8", "text/html", "text/plain")
+	p("ChromeAgent", "text/html", nil, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "text/html")
 }
